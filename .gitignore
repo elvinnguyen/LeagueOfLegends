@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+/src/dragontail-15.5.1/
+
 
 # testing
 /coverage

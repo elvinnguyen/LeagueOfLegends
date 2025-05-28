@@ -68,7 +68,7 @@ const ChampionInfo = () => {
         <li>Attack Speed: {stats.attackspeed}</li>
       </ul>
 
-      <h2>🛡 Passive</h2>
+      <h2>Passive</h2>
       <img
         src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/passive/${passive.image.full}`}
         alt={passive.name}

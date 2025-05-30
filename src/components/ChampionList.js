@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
-
 const ChampionList = () => {
   const [champions, setChampions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,10 +20,10 @@ const ChampionList = () => {
   }, []);
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "Arial" }}>
-      <SearchBar onSearchChange={setSearchTerm} />
+    <div className="page">
       <h1>Select a Champion</h1>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+      <SearchBar onSearchChange={setSearchTerm} />
+      <div className="championGrid">
         {champions
           .filter((champ) =>
             champ.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -33,19 +32,10 @@ const ChampionList = () => {
             <Link
               key={champ.id}
               to={`/champion/${champ.id}`}
-              style={{
-                textDecoration: "none",
-                color: "black",
-                border: "1px solid #ccc",
-                padding: "1rem",
-                borderRadius: "8px",
-                width: "150px",
-                textAlign: "center",
-              }}>
+              className="championCard">
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/champion/${champ.image.full}`}
                 alt={champ.name}
-                style={{ width: "100%" }}
               />
               <div>{champ.name}</div>
             </Link>

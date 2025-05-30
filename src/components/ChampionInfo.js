@@ -46,14 +46,13 @@ const ChampionInfo = () => {
   } = champion;
 
   return (
-    <div style={{ padding: "1rem", fontFamily: "Arial" }}>
+    <div className="championPage">
       <h1>
         {champName} — {title}
       </h1>
       <img
         src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/champion/${image.full}`}
         alt={champName}
-        style={{ maxWidth: "150px" }}
       />
 
       <h2>Lore</h2>
@@ -70,9 +69,9 @@ const ChampionInfo = () => {
 
       <h2>Passive</h2>
       <img
+        className="passiveImage"
         src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/passive/${passive.image.full}`}
         alt={passive.name}
-        style={{ width: "48px", height: "48px" }}
       />
       <p>
         <strong>{passive.name}</strong>: {passive.description}
@@ -80,11 +79,11 @@ const ChampionInfo = () => {
 
       <h2>Abilities</h2>
       {spells.map((spell) => (
-        <div key={spell.id} style={{ marginBottom: "1.5rem" }}>
+        <div key={spell.id} className="spells">
           <img
+            className="spellImage"
             src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/spell/${spell.image.full}`}
             alt={spell.name}
-            style={{ width: "48px", height: "48px" }}
           />
           <h3>{spell.name}</h3>
           <p

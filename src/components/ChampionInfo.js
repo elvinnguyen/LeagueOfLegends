@@ -24,14 +24,14 @@ const ChampionInfo = () => {
           `https://ddragon.leagueoflegends.com/cdn/15.5.1/data/en_US/champion/${id}.json`
         );
         const data = await res.json();
-        setChampion(data.data[id]); 
+        setChampion(data.data[id]);
       } catch (err) {
         console.error("Failed to load champion data:", err);
       }
     };
 
     fetchChampion();
-  }, [id]); 
+  }, [id]);
 
   if (!champion) return <p>Loading...</p>;
 
@@ -62,20 +62,25 @@ const ChampionInfo = () => {
       <ul>
         <li>HP: {stats.hp}</li>
         <li>Attack Damage: {stats.attackdamage}</li>
+        <li>Mana/Energy: {stats.mp}</li>
         <li>Armor: {stats.armor}</li>
+        <li>Magic Resist: {stats.spellblock}</li>
         <li>Move Speed: {stats.movespeed}</li>
         <li>Attack Speed: {stats.attackspeed}</li>
+        <li>Attack Range: {stats.attackrange}</li>
       </ul>
 
       <h2>Passive</h2>
-      <img
-        className="passiveImage"
-        src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/passive/${passive.image.full}`}
-        alt={passive.name}
-      />
-      <p>
-        <strong>{passive.name}</strong>: {passive.description}
-      </p>
+      <div className="passive">
+        <img
+          className="passiveImage"
+          src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/passive/${passive.image.full}`}
+          alt={passive.name}
+        />
+        <p>
+          <strong>{passive.name}</strong>: {passive.description}
+        </p>{" "}
+      </div>
 
       <h2>Abilities</h2>
       {spells.map((spell) => (
@@ -93,10 +98,10 @@ const ChampionInfo = () => {
           />
           <ul>
             <li>
-              <strong>Cooldown:</strong> {spell.cooldownBurn}
+              <strong>Cooldown:</strong> {spell.cooldownBurn} seconds 
             </li>
             <li>
-              <strong>Cost:</strong> {spell.costBurn || "No Cost"}
+            <strong>Cost:</strong> {" "} {spell.costBurn ? `${spell.costBurn} mana` : "No Cost"}
             </li>
             {spell.effectBurn?.map((val, i) =>
               val && val !== "0" ? (

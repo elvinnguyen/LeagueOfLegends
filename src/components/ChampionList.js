@@ -21,7 +21,7 @@ const ChampionList = () => {
 
   return (
     <div className="page">
-      <h1>Select a Champion</h1>
+      <h1 className="title">Select a Champion</h1>
       <SearchBar onSearchChange={setSearchTerm} />
       <div className="championGrid">
         {champions

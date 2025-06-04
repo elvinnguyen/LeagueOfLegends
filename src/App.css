@@ -1,5 +1,5 @@
 body {
-  background-color: #1e1e1e; 
+  background-color: #1e1e1e;
   color: white;
   margin: 0;
   padding: 0;
@@ -36,7 +36,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.championPage ul{
+.championPage ul {
   list-style-type: none;
 }
 
@@ -58,6 +58,25 @@ body {
   margin-bottom: 1.5rem;
   border: 1px solid gray;
   border-radius: 10px;
+}
+
+.spellHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+}
+
+.spellName {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.spellCost {
+  font-size: 0.9rem;
+  text-align: right;
+  white-space: nowrap;
+  margin-left: auto;
 }
 
 .spellImage {

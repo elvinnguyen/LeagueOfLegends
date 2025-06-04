@@ -79,30 +79,33 @@ const ChampionInfo = () => {
         />
         <p>
           <strong>{passive.name}</strong>: {passive.description}
-        </p>{" "}
+        </p>
       </div>
 
       <h2>Abilities</h2>
       {spells.map((spell) => (
         <div key={spell.id} className="spells">
-          <img
-            className="spellImage"
-            src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/spell/${spell.image.full}`}
-            alt={spell.name}
-          />
-          <h3>{spell.name}</h3>
+          <div className="spellHeader">
+            <img
+              className="spellImage"
+              src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/spell/${spell.image.full}`}
+              alt={spell.name}
+            />
+            <h3 className="spellName">{spell.name}</h3>
+            <div className="spellCost">
+              <strong>Cooldown:</strong> {spell.cooldownBurn} seconds
+              <br />
+              <strong>Cost:</strong>{" "}
+              {spell.costBurn ? `${spell.costBurn} mana` : "No Cost"}
+            </div>
+          </div>
           <p
+            className="tooltip"
             dangerouslySetInnerHTML={{
               __html: fillTooltip(spell.tooltip, spell.vars, spell.effectBurn),
             }}
           />
           <ul>
-            <li>
-              <strong>Cooldown:</strong> {spell.cooldownBurn} seconds 
-            </li>
-            <li>
-            <strong>Cost:</strong> {" "} {spell.costBurn ? `${spell.costBurn} mana` : "No Cost"}
-            </li>
             {spell.effectBurn?.map((val, i) =>
               val && val !== "0" ? (
                 <li key={i}>

@@ -16,6 +16,7 @@ const fillTooltip = (tooltip, vars, effectBurn) => {
 const ChampionInfo = () => {
   const { id } = useParams();
   const [champion, setChampion] = useState(null);
+  const [skinIndex, setSkinIndex] = useState(0);
 
   useEffect(() => {
     const fetchChampion = async () => {
@@ -33,27 +34,51 @@ const ChampionInfo = () => {
     fetchChampion();
   }, [id]);
 
+  const nextSkin = () => {
+    if (skinIndex < champion.skins.length - 1) {
+      setSkinIndex(skinIndex + 1);
+    } else {
+      setSkinIndex(0);
+    }
+  };
+
+  const prevSkin = () => {
+    if (skinIndex === 0) {
+      setSkinIndex(champion.skins.length - 1);
+    } else {
+      setSkinIndex(skinIndex - 1);
+    }
+  };
+
   if (!champion) return <p>Loading...</p>;
 
-  const {
-    name: champName,
-    title,
-    image,
-    lore,
-    stats,
-    passive,
-    spells,
-  } = champion;
+  const { name: champName, title, lore, stats, passive, spells } = champion;
+  const skins = champion.skins;
+  const currentSkin = skins[skinIndex];
 
   return (
     <div className="championPage">
       <h1>
         {champName} — {title}
       </h1>
-      <img
-        src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/champion/${image.full}`}
-        alt={champName}
-      />
+
+      <div>{/* display skin carousel here */}</div>
+
+      {currentSkin && (
+        <img
+          className="splashArt"
+          src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_${currentSkin.num}.jpg`}
+          alt={currentSkin.name}
+        />
+      )}
+
+      <button className="leftArrow" onClick={prevSkin}>
+        &larr;
+      </button>
+
+      <button className="rightArrow" onClick={nextSkin}>
+        &rarr;
+      </button>
 
       <h2>Lore</h2>
       <p>{lore}</p>

@@ -62,23 +62,23 @@ const ChampionInfo = () => {
         {champName} — {title}
       </h1>
 
-      <div>{/* display skin carousel here */}</div>
+      <div className="artContainer">
+        {currentSkin && (
+          <img
+            className="splashArt"
+            src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_${currentSkin.num}.jpg`}
+            alt={currentSkin.name}
+          />
+        )}
+      </div>
 
-      {currentSkin && (
-        <img
-          className="splashArt"
-          src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_${currentSkin.num}.jpg`}
-          alt={currentSkin.name}
-        />
-      )}
+      <div className="leftArrContainer">
+        <button className="leftArrow" onClick={prevSkin}></button>
+      </div>
 
-      <button className="leftArrow" onClick={prevSkin}>
-        &larr;
-      </button>
-
-      <button className="rightArrow" onClick={nextSkin}>
-        &rarr;
-      </button>
+      <div className="rightArrContainer">
+        <button className="rightArrow" onClick={nextSkin}></button>
+      </div>
 
       <h2>Lore</h2>
       <p>{lore}</p>
@@ -97,14 +97,15 @@ const ChampionInfo = () => {
 
       <h2>Passive</h2>
       <div className="passive">
-        <img
-          className="passiveImage"
-          src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/passive/${passive.image.full}`}
-          alt={passive.name}
-        />
-        <p>
-          <strong>{passive.name}</strong>: {passive.description}
-        </p>
+        <div className="passiveContainer">
+          <img
+            className="passiveImage"
+            src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/passive/${passive.image.full}`}
+            alt={passive.name}
+          />
+          <h3 className="passiveName">{passive.name}</h3>
+        </div>
+        <p>{passive.description}</p>
       </div>
 
       <h2>Abilities</h2>

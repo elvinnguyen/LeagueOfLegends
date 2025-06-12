@@ -14,6 +14,11 @@ body {
   text-align: center;
 }
 
+.searchBar {
+  display: flex;
+  justify-content: right;
+}
+
 .championGrid {
   display: flex;
   flex-wrap: wrap;

@@ -1,16 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const fillTooltip = (tooltip, vars, effectBurn) => {
-  return tooltip.replace(/{{\s*(\w+)\s*}}/g, (_, varName) => {
-    const found = vars?.find((v) => v.key === varName);
-    if (found && found.coeff) {
-      return Array.isArray(found.coeff)
-        ? found.coeff.join("/")
-        : found.coeff.toString();
+const fillTooltip = (tooltip, effectBurn = [], vars = []) => {
+  if (!tooltip) return "";
+
+  const knownKeywordMap = {
+    totaldamage: 1,
+    tantrumdamage: 3,
+    basedamage: 2,
+    totalhealthdamage: 4,
+    damage: 0,
+    damagereduction: 5,
+  };
+
+  let filled = tooltip.replace(/{{\s*(.*?)\s*}}/g, (_, key) => {
+    if (key.startsWith("e")) {
+      const index = parseInt(key.slice(1));
+      return effectBurn?.[index] || `[${key}]`;
     }
-    return `[${varName}]`;
+
+    const matchVar = vars?.find((v) => v?.key === key);
+    if (matchVar) {
+      const ratio = matchVar.coeff?.[0];
+      const scale =
+        matchVar.link === "spelldamage"
+          ? "AP"
+          : matchVar.link === "attackdamage"
+          ? "AD"
+          : matchVar.link;
+      return ratio ? `+${ratio * 100}% ${scale}` : `[${key}]`;
+    }
+    console.warn("Unmapped keyword:", key);
+    return `[${key}]`;
   });
+
+  filled = filled.replace(/\[([^\]]+)\]/g, (_, key) => {
+    const matchVar = vars?.find((v) => v?.key === key);
+    if (matchVar?.effectIndex != null) {
+      return effectBurn?.[matchVar.effectIndex] || `[${key}]`;
+    }
+
+    const knownIndex = knownKeywordMap[key];
+    if (knownIndex != null) {
+      return effectBurn?.[knownIndex] || `[${key}]`;
+    }
+
+    return `[${key}]`;
+  });
+
+  filled = filled.replace(/\[spellmodifierdescriptionappend\]/gi, "");
+  return filled;
 };
 
 const ChampionInfo = () => {
@@ -126,9 +165,9 @@ const ChampionInfo = () => {
             </div>
           </div>
           <p
-            className="tooltip"
+            className="toolTip"
             dangerouslySetInnerHTML={{
-              __html: fillTooltip(spell.tooltip, spell.vars, spell.effectBurn),
+              __html: fillTooltip(spell.tooltip, spell.effectBurn, spell.vars),
             }}
           />
           <ul>

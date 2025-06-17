@@ -14,12 +14,23 @@ body {
   text-align: center;
 }
 
-.searchBar {
+.search-bar {
   display: flex;
   justify-content: right;
 }
 
-.championGrid {
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.filter-button {
+  margin-left: 7px;
+  width: 145px;
+  height: 35px;
+}
+
+.champion-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -27,7 +38,7 @@ body {
   padding-left: 100px;
 }
 
-.championCard {
+.champion-card {
   text-decoration: none;
   color: white;
   border: 1px solid #000000;
@@ -36,31 +47,42 @@ body {
   text-align: center;
 }
 
-.championPage {
+.champion-page {
   padding: 1rem;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.artContainer {
+.champion-name {
+  text-transform: uppercase;
+}
+
+.art-container {
   display: flex;
   justify-content: center;
 }
 
-.splashArt {
+.splash-art {
   width: 90%;
   height: 800px;
   border: 1px solid black;
   border-radius: 10px;
 }
 
-.leftArrContainer {
+.skin-name {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.left-arr-container {
   position: absolute;
   left: 2rem;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.leftArrow {
+.left-arrow {
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -71,14 +93,14 @@ body {
   cursor: pointer;
 }
 
-.rightArrContainer {
+.right-arr-container {
   position: absolute;
   right: 2rem;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.rightArrow {
+.right-arrow {
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -89,7 +111,7 @@ body {
   cursor: pointer;
 }
 
-.championPage ul {
+.champion-page ul {
   list-style-type: none;
 }
 
@@ -100,20 +122,20 @@ body {
   border-radius: 10px;
 }
 
-.passiveContainer {
+.passive-container {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
 }
 
-.passiveImage {
+.passive-image {
   width: 48px;
   height: 48px;
   border: 1px solid gray;
   border-radius: 10px;
 }
 
-.passiveName {
+.passive-name {
   margin: 0;
 }
 
@@ -124,26 +146,26 @@ body {
   border-radius: 10px;
 }
 
-.spellHeader {
+.spell-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   position: relative;
 }
 
-.spellName {
+.spell-name {
   margin: 0;
   margin-left: 10px;
 }
 
-.spellCost {
+.spell-cost {
   font-size: 0.9rem;
   text-align: right;
   white-space: nowrap;
   margin-left: auto;
 }
 
-.spellImage {
+.spell-image {
   width: 48px;
   height: 48px;
   border: 1px solid gray;

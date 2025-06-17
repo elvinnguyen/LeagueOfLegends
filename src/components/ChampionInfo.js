@@ -96,33 +96,48 @@ const ChampionInfo = () => {
   const currentSkin = skins[skinIndex];
 
   return (
-    <div className="championPage">
-      <h1>
-        {champName} — {title}
+    <div className="champion-page">
+      <h1 className="champion-name">
+        {title} - {champName}
       </h1>
 
-      <div className="artContainer">
+      <div className="art-container">
         {currentSkin && (
           <img
-            className="splashArt"
+            className="splash-art"
             src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_${currentSkin.num}.jpg`}
             alt={currentSkin.name}
           />
         )}
       </div>
 
-      <div className="leftArrContainer">
-        <button className="leftArrow" onClick={prevSkin}></button>
+      <div className="skin-name">{currentSkin.name}</div>
+
+      <div className="left-arr-aontainer">
+        <button className="left-arrow" onClick={prevSkin}></button>
       </div>
 
-      <div className="rightArrContainer">
-        <button className="rightArrow" onClick={nextSkin}></button>
+      <div className="right-arr-container">
+        <button className="right-arrow" onClick={nextSkin}></button>
       </div>
 
       <h2>Lore</h2>
       <p>{lore}</p>
 
+      <h2>Role</h2>
+      <p>{champion.tags.join(" / ")}</p>
+
       <h2>Base Stats</h2>
+      <p>HP: {stats.hp}</p>
+      <p>Attack Damage: {stats.attackdamage}</p>
+      <p>Mana/Energy: {stats.mp}</p>
+      <p>Armor: {stats.armor}</p>
+      <p>Magic Resist: {stats.spellblock}</p>
+      <p>Move Speed: {stats.movespeed}</p>
+      <p>Attack Speed: {stats.attackspeed}</p>
+      <p>Attack Range: {stats.attackrange}</p>
+
+      {/* 
       <ul>
         <li>HP: {stats.hp}</li>
         <li>Attack Damage: {stats.attackdamage}</li>
@@ -133,16 +148,17 @@ const ChampionInfo = () => {
         <li>Attack Speed: {stats.attackspeed}</li>
         <li>Attack Range: {stats.attackrange}</li>
       </ul>
+      */}
 
       <h2>Passive</h2>
       <div className="passive">
-        <div className="passiveContainer">
+        <div className="passive-container">
           <img
-            className="passiveImage"
+            className="passive-image"
             src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/passive/${passive.image.full}`}
             alt={passive.name}
           />
-          <h3 className="passiveName">{passive.name}</h3>
+          <h3 className="passive-name">{passive.name}</h3>
         </div>
         <p>{passive.description}</p>
       </div>
@@ -150,14 +166,14 @@ const ChampionInfo = () => {
       <h2>Abilities</h2>
       {spells.map((spell) => (
         <div key={spell.id} className="spells">
-          <div className="spellHeader">
+          <div className="spell-header">
             <img
-              className="spellImage"
+              className="spell-image"
               src={`https://ddragon.leagueoflegends.com/cdn/15.5.1/img/spell/${spell.image.full}`}
               alt={spell.name}
             />
-            <h3 className="spellName">{spell.name}</h3>
-            <div className="spellCost">
+            <h3 className="spell-name">{spell.name}</h3>
+            <div className="spell-cost">
               <strong>Cooldown:</strong> {spell.cooldownBurn} seconds
               <br />
               <strong>Cost:</strong>{" "}
@@ -165,7 +181,7 @@ const ChampionInfo = () => {
             </div>
           </div>
           <p
-            className="toolTip"
+            className="tool-tip"
             dangerouslySetInnerHTML={{
               __html: fillTooltip(spell.tooltip, spell.effectBurn, spell.vars),
             }}

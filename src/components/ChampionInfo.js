@@ -97,7 +97,7 @@ const ChampionInfo = () => {
 
   return (
     <div className="champion-page">
-      <h1 className="champion-name">
+      <h1 className="champion-info-name">
         {title} - {champName}
       </h1>
 
